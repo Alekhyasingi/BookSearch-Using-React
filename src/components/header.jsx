@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import bookSearchImage from "./img/BookSearch.png";
+import bookSearchImage from "./img/bookSearch.png";
 class Header extends Component {
   handleSubmit = e => {
     e.preventDefault();
+
     var input = ReactDOM.findDOMNode(this.refs.search);
 
     this.props.localSubmit(input.value);
@@ -28,9 +29,9 @@ class Header extends Component {
               <input
                 className="form-control"
                 placeholder="Book Title ..."
-                type="search"
+                ref="search"
               />
-              <button className="btn btn-default">
+              <button className="btn btn-primary no-top-margin">
                 <i className="fa fa-search"></i>
               </button>
             </div>

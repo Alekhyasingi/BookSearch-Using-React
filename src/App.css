@@ -123,7 +123,7 @@ a:focus {
   height: 250px;
 }
 
-.search-icon span {
+.search-icon i {
   margin-top: 100px;
   color: #bbb;
   text-shadow: 0 2px 2px #fff;
@@ -241,6 +241,7 @@ a:focus {
   transform-origin: 0% 50%;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  display: block;
 }
 
 .cover::before {
@@ -292,22 +293,22 @@ a:focus {
   margin: 1em 0 0 0;
   font-weight: 300;
   font-size: 1.8em;
-  font-family: "Abril Fatface", serif;
+  font-family: "cursive"; /* "Abril Fatface", serif;*/
 }
 
 .bookshelf figcaption h2 span {
   position: relative;
   display: block;
-  margin: 1em 0 0 0;
+  /*margin: 1em 0 0 0;*/
   padding: 1em 0 0 0;
-  text-transform: uppercase;
+  /* text-transform: uppercase;*/
   letter-spacing: 1px;
   font-weight: 400;
-  font-size: 0.4em;
-  font-family: "Lato", sans-serif;
+  font-size: 0.5em;
+  font-family: "cursive"; /* "Lato", sans-serif;*/
 }
 
-.bookshelf figcaption h2 span::before,
+/* .bookshelf figcaption h2 span::before, */
 .details ul li:first-child::after {
   position: absolute;
   top: 0;
@@ -355,18 +356,6 @@ a:focus {
   font-weight: 300;
   font-size: 1.8em;
   font-family: "Abril Fatface", serif;
-}
-
-.bookshelf figcaption h2 span {
-  position: relative;
-  display: block;
-  margin: 1em 0 0 0;
-  padding: 1em 0 0 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 400;
-  font-size: 0.4em;
-  font-family: "Lato", sans-serif;
 }
 
 .bookshelf figcaption h2 span::before,
@@ -499,15 +488,20 @@ a:focus {
 }
 
 .details {
-  visibility: hidden;
-  opacity: 0;
-  z-index: -1;
+  /*visibility: hidden;*/
+  opacity: 1;
+  background: white;
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5s;
+
+  /*  z-index: -1; */
   -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
   transition: opacity 0.5s, visibility 0s 0.5s;
 }
 
 .details-open .details {
-  visibility: hidden;
+  /*visibility: hidden;*/
   opacity: 1;
   z-index: 10;
   -webkit-transition: opacity 0.5s, visibility 0s;
@@ -516,11 +510,11 @@ a:focus {
 
 .details ul li {
   visibility: visible;
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
-  -webkit-transform: translateX(30%);
-  transform: translateX(30%);
+  /* -webkit-transform: translateX(30%);
+  transform: translateX(30%); */
 }
 
 .details-open .details ul li:first-child {
@@ -729,4 +723,19 @@ a:focus {
     -webkit-transform: scale(0.95);
     transform: scale(0.95);
   }
+}
+/*toggle changes for display of book details*/
+
+.clicker.hidden {
+  display: none;
+}
+
+#perspective:target ~ div a[href="#perspective"] {
+  display: none;
+}
+#perspective:target ~ div a[href="#details"] {
+  display: inline-block;
+}
+#perspective:target ~ div .details {
+  height: 260px;
 }

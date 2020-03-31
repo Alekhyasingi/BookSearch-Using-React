@@ -42,27 +42,40 @@ class Books extends Component {
     }
 
     return (
-      <figure
-        className="col-md-3 col-xs-6 text-center"
-        id={id}
-        //style={{ height: "250px" }}
-      >
-        <div className="perspective">
+      <figure className="col-md-3 col-xs-6 text-center" id={id}>
+        <div id="perspective" className="perspective">
           <div className="book" id={id}>
             <div className="cover">
               <img
                 src={links}
                 alt={this.state.title}
                 title={this.state.title}
+                width="100%"
+                height="100%"
               />
             </div>
           </div>
         </div>
-        <div className="buttons">
-          <a href={this.state.previewLink} target="_blank">
-            Preview
-          </a>
-          <a href="#">Details</a>
+        <div>
+          <div className="details">
+            <ul>
+              <li>{descrip}</li>
+              <li>{this.state.publishedDate}</li>
+              <li>{this.state.publisher}</li>
+              <li>{this.state.pageCount} pages</li>
+            </ul>
+          </div>
+          <div className="buttons">
+            <a href={this.state.previewLink} target="_blank">
+              Preview
+            </a>
+            <a href="#perspective" className="clicker">
+              Details
+            </a>
+            <a href="#details " className="clicker hidden">
+              Collapse
+            </a>
+          </div>
         </div>
         <figcaption>
           <h2>
@@ -70,14 +83,6 @@ class Books extends Component {
             <span> By: {authors}</span>
           </h2>
         </figcaption>
-        <div className="details">
-          <ul>
-            <li>{descrip}</li>
-            <li>{this.state.publishedDate}</li>
-            <li>{this.state.publisher}</li>
-            <li>{this.state.pageCount} pages</li>
-          </ul>
-        </div>
       </figure>
     );
   }

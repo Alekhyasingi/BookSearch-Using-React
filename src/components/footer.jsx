@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import reactImage from "./img/react.png";
-import googleBooksAPIImage from "./img/googlebooks.png";
+//import reactImage from "./img/react.png";
+//import googleBooksAPIImage from "./img/googlebooks.png";
 
 class Footer extends Component {
   //state = {};

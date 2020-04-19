@@ -1,14 +1,24 @@
 import React, { Component } from "react";
 import noBookCover from "./img/no_book_cover.jpg";
 class Books extends Component {
-  state = {};
+  constructor() {
+    super();
+    this.state = {
+      displayDetails: false,
+    };
+  }
 
   componentDidMount() {
     if (this.props.item != null) {
       this.setState(this.props.item);
     }
   }
-
+  handleClick = (e) => {
+    e.preventDefault();
+    this.setState((prevState) => {
+      return { displayDetails: !prevState.displayDetails };
+    });
+  };
   render() {
     var authors = "";
 
@@ -32,6 +42,7 @@ class Books extends Component {
 
     if (this.props.identifier != null) {
       id = "book-" + this.props.identifier;
+      var a = this.state.count;
     }
     var links = noBookCover;
     if (
@@ -43,7 +54,7 @@ class Books extends Component {
 
     return (
       <figure className="col-md-3 col-xs-6 text-center" id={id}>
-        <div id="perspective" className="perspective">
+        <div className={this.state.displayDetails ? "hidden" : "perspective"}>
           <div className="book" id={id}>
             <div className="cover">
               <img
@@ -57,7 +68,7 @@ class Books extends Component {
           </div>
         </div>
         <div>
-          <div className="details">
+          <div className={this.state.displayDetails ? "details" : "hidden"}>
             <ul>
               <li>{descrip}</li>
               <li>{this.state.publishedDate}</li>
@@ -69,11 +80,8 @@ class Books extends Component {
             <a href={this.state.previewLink} target="_blank">
               Preview
             </a>
-            <a href="#perspective" className="clicker">
-              Details
-            </a>
-            <a href="#details " className="clicker hidden">
-              Collapse
+            <a href="#" className="clicker" onClick={this.handleClick}>
+              {this.state.displayDetails ? "Collapse" : "Details"}
             </a>
           </div>
         </div>

@@ -1,42 +1,47 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import bookSearchImage from "./img/bookSearch.png";
+import bookSearchImage from "./img/bookSearch.jpg";
 class Header extends Component {
-  handleSubmit = e => {
-    e.preventDefault();
+  state = {
+    searchInput: "",
+  };
+  handleChange = (event) => {
+    this.setState({ searchInput: event.target.value });
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
 
-    var input = ReactDOM.findDOMNode(this.refs.search);
-
-    this.props.localSubmit(input.value);
-
-    input.value = "";
+    this.props.localSubmit(this.state.searchInput);
+    this.setState({ searchInput: "" });
   };
   render() {
     return (
-      <header className="codrops-header">
-        {/* <h1>Book Search</h1> */}
-        <div>
-          <img className="logo-img" src={bookSearchImage} />
-        </div>
+      <header className="main">
+        <p>Book Search</p>
 
-        <div>
-          <form
-            className="form-inline"
-            style={{ marginTop: 30 + "px" }}
-            onSubmit={this.handleSubmit}
-          >
-            <div className="form-group">
-              <input
-                className="form-control"
-                placeholder="Book Title ..."
-                ref="search"
-              />
-              <button className="btn btn-primary no-top-margin">
+        <form onSubmit={this.handleSubmit}>
+          <div className="input-group">
+            <img
+              style={{ float: "left", height: 50, width: 150 }}
+              className="logo-img"
+              src={bookSearchImage}
+            />
+
+            <input
+              className="form-control"
+              placeholder="Search"
+              ref="search"
+              name="searchInput"
+              value={this.state.searchInput}
+              onChange={this.handleChange}
+              style={{ width: 350 }}
+            />
+            <div className="input-group-append">
+              <button type="Submit" className="btn btn-secondary">
                 <i className="fa fa-search"></i>
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </header>
     );
   }

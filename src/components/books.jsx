@@ -35,7 +35,7 @@ class Books extends Component {
     var descrip = "...";
 
     if (this.state.description != null) {
-      descrip = this.state.description.substring(0, 80) + "...";
+      descrip = this.state.description.substring(0, 230) + "...";
     }
 
     var id = "";

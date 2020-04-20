@@ -18,10 +18,13 @@ class Header extends Component {
       <header className="main">
         <p>Book Search</p>
 
-        <form onSubmit={this.handleSubmit}>
+        <form
+          style={{ width: 550, marginLeft: "auto", marginRight: "auto" }}
+          onSubmit={this.handleSubmit}
+        >
           <div className="input-group">
             <img
-              style={{ float: "left", height: 50, width: 150 }}
+              style={{ height: 50, width: 150 }}
               className="logo-img"
               src={bookSearchImage}
             />
@@ -33,7 +36,6 @@ class Header extends Component {
               name="searchInput"
               value={this.state.searchInput}
               onChange={this.handleChange}
-              style={{ width: 350 }}
             />
             <div className="input-group-append">
               <button type="Submit" className="btn btn-secondary">

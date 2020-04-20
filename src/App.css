@@ -14,17 +14,10 @@ a:focus {
   color: #fff;
 }
 header {
-  /*display: flex;
-  align-items: center;
-  background: #6441a5;
-    background: linear-gradient(to right, #2a0845, #6441a5); */
   position: relative;
   margin: 0 auto;
-  /*  padding: 3em 1em; */
   color: #fff;
   text-align: center;
-  /*  background: url(/bgheader.jpg) no-repeat center center; 
-  background-size: cover; */
 }
 header > p {
   font-weight: bold;
@@ -33,29 +26,6 @@ header > p {
   font-size: 50px;
   margin-left: 60px;
 }
-/* 
-.logo-img {
-  width: 150px;
-  height: 150px;
-}
-.codrops-header div {
-  display: inline-block;
-  bottom: 0;
-}
-.codrops-header h1 {
-  font-size: 2.625em;
-  line-height: 1.3;
-  margin: 0;
-  font-weight: 700;
-}
-
-.codrops-header h1 span {
-  display: block;
-  font-size: 60%;
-  opacity: 0.7;
-  padding: 0 0 0.6em 0.1em;
-}
- */
 .search-icon {
   font-size: 100px;
   display: block;
@@ -249,22 +219,22 @@ header > p {
 .buttons a:active {
   color: #64696a;
 }
-
+/* 
 .bookshelf figcaption {
   position: relative;
   top: 100%;
   padding: 0 2em;
   text-align: center;
-}
-
+} */
+/* 
 .bookshelf figcaption h2 {
   margin: 1em 0 0 0;
   font-weight: 300;
   font-size: 1.8em;
   font-family: "Abril Fatface", serif;
-}
+} */
 
-.bookshelf figcaption h2 span::before,
+/* .bookshelf figcaption h2 span::before,
 .details ul li:first-child::after {
   position: absolute;
   top: 0;
@@ -273,7 +243,7 @@ header > p {
   height: 1px;
   background: rgba(0, 0, 0, 0.1);
   content: "";
-}
+} */
 /* Details panel */
 
 .details {
@@ -285,7 +255,7 @@ header > p {
 
 .details ul {
   margin: 0;
-  padding: 60px 30px 0 30px;
+  /*  padding: 60px 30px 0 30px; */
   list-style: none;
   text-align: left;
 }

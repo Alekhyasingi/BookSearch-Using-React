@@ -1,61 +1,64 @@
 import React, { Component } from "react";
 import noBookCover from "./img/no_book_cover.jpg";
 class Books extends Component {
-  constructor() {
+  /* constructor() {
     super();
-    /*  uncontrolled state as details may not need 
-    to be saved by parent class but can be refreshed */
+  
     this.state = {
       displayDetails: false,
     };
-  }
+  } */
 
-  handleClick = (e) => {
+  /* handleClick = (e) => {
     e.preventDefault();
     this.setState((prevState) => {
       return { displayDetails: !prevState.displayDetails };
     });
-  };
+  }; */
   render() {
-    const { item } = this.props;
+    const { volumeInfo } = this.props.item;
     var authors = "";
 
-    if (item.authors != null) {
-      for (var i = 0; i < item.authors.length; i++) {
+    if (volumeInfo.authors != null) {
+      for (var i = 0; i < volumeInfo.authors.length; i++) {
         if (i > 1) {
-          authors = ", " + item.authors[i];
+          authors = ", " + volumeInfo.authors[i];
         } else {
-          authors = item.authors[i];
+          authors = volumeInfo.authors[i];
         }
       }
     }
 
     var descrip = "...";
 
-    if (item.description != null) {
-      descrip = item.description.substring(0, 200) + "...";
+    if (volumeInfo.description != null) {
+      descrip = volumeInfo.description.substring(0, 200) + "...";
     }
 
     var id = "";
 
-    if (this.props.identifier != null) {
-      id = "book-" + this.props.identifier;
-      var a = item.count;
+    if (this.props.item.id != null) {
+      id = "book-" + this.props.item.id;
     }
     var links = noBookCover;
-    if (item.imageLinks != null && item.imageLinks.thumbnail != null) {
-      links = item.imageLinks.thumbnail;
+    if (
+      volumeInfo.imageLinks != null &&
+      volumeInfo.imageLinks.thumbnail != null
+    ) {
+      links = volumeInfo.imageLinks.thumbnail;
     }
 
     return (
       <figure className="col-md-3 col-xs-6 text-center" id={id}>
-        <div className={this.state.displayDetails ? "hidden" : "perspective"}>
+        <div
+          className={this.props.item.displayDetails ? "hidden" : "perspective"}
+        >
           <div className="book" id={id}>
             <div className="cover">
               <img
                 src={links}
-                alt={item.title}
-                title={item.title}
+                alt={volumeInfo.title}
+                title={volumeInfo.title}
                 width="100%"
                 height="100%"
               />
@@ -63,26 +66,35 @@ class Books extends Component {
           </div>
         </div>
         <div>
-          <div className={this.state.displayDetails ? "details" : "hidden"}>
+          <div
+            className={this.props.item.displayDetails ? "details" : "hidden"}
+          >
             <ul>
               <li>{descrip}</li>
-              <li>{item.publishedDate}</li>
-              <li>{item.publisher}</li>
-              <li>{item.pageCount} pages</li>
+              <li>{volumeInfo.publishedDate}</li>
+              <li>{volumeInfo.publisher}</li>
+              <li>{volumeInfo.pageCount} pages</li>
             </ul>
           </div>
           <div className="buttons">
-            <a href={item.previewLink} target="_blank">
+            <a href={volumeInfo.previewLink} target="_blank">
               Preview
             </a>
-            <a href="#" className="clicker" onClick={this.handleClick}>
-              {this.state.displayDetails ? "Collapse" : "Details"}
+            <a
+              href="#"
+              className="clicker"
+              onClick={(e) => {
+                e.preventDefault();
+                this.props.handleClick(this.props.item.id);
+              }}
+            >
+              {this.props.item.displayDetails ? "Collapse" : "Details"}
             </a>
           </div>
         </div>
         <figcaption>
           <h2>
-            <span>{item.title}</span>
+            <span>{volumeInfo.title}</span>
             <span> By: {authors}</span>
           </h2>
         </figcaption>

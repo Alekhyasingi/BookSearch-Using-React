@@ -19,6 +19,7 @@ class Header extends Component {
               style={{ height: 50, width: 150 }}
               className="logo-img"
               src={bookSearchImage}
+              alt="lib"
             />
 
             <input

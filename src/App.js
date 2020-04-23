@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Books from "./components/books";
-import $ from "jquery";
+
 import "./App.css";
 import axios from "axios";
 
@@ -18,26 +18,16 @@ class App extends Component {
 
   reloadBookList() {
     this.setState({ items: [] });
-    var component = this;
+
     axios
       .get("http://localhost:8080/search")
       .then((response) => {
-        console.log(response.data.result);
-        component.setState({ items: response.data.result });
-        $(".front").css("background", "url(img/no_book_cover.jpg)");
+        const items = response.data.result.map((item) => ({
+          ...item,
+          displayDetails: false,
+        }));
 
-        for (var i = 0; i < component.state.items.length; i++) {
-          if (component.state.items[i].volumeInfo.imageLinks != null) {
-            $("#book-" + component.state.items[i].id)
-              .find(".front")
-              .css(
-                "background",
-                "url(" +
-                  component.state.items[i].volumeInfo.imageLinks.thumbnail +
-                  ")"
-              );
-          }
-        }
+        this.setState({ items });
       })
       .catch(function (error) {
         console.log(error);
@@ -50,11 +40,28 @@ class App extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+  handleDisplayDetails = (identifier) => {
+    const items = this.state.items.map((item) => {
+      if (item.id === identifier) {
+        item.displayDetails = !item.displayDetails;
+        return item;
+      }
+      return item;
+    });
+
+    this.setState({ items });
+  };
   localSubmit(search) {
     axios
       .get("http://localhost:8080/search/title/" + search)
       .then((response) => {
-        this.setState({ items: response.data.result, searchInput: "" });
+        const items = response.data.result.map((item) => ({
+          ...item,
+          displayDetails: false,
+        }));
+
+        this.setState({ items });
+        this.setState({ items, searchInput: "" });
       })
       .catch(function (error) {
         console.log(error);
@@ -65,9 +72,13 @@ class App extends Component {
     var books = [];
     var content = [];
     if (this.state.items !== null && this.state.items.length !== 0) {
-      books = this.state.items.map(function (book) {
+      books = this.state.items.map((book) => {
         return (
-          <Books key={book.id} item={book.volumeInfo} identifier={book.id} />
+          <Books
+            key={book.id}
+            item={book}
+            handleClick={this.handleDisplayDetails}
+          />
         );
       });
     }

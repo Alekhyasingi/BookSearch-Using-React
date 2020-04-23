@@ -3,16 +3,13 @@ import noBookCover from "./img/no_book_cover.jpg";
 class Books extends Component {
   constructor() {
     super();
+    /*  uncontrolled state as details may not need 
+    to be saved by parent class but can be refreshed */
     this.state = {
       displayDetails: false,
     };
   }
 
-  componentDidMount() {
-    if (this.props.item != null) {
-      this.setState(this.props.item);
-    }
-  }
   handleClick = (e) => {
     e.preventDefault();
     this.setState((prevState) => {
@@ -20,36 +17,34 @@ class Books extends Component {
     });
   };
   render() {
+    const { item } = this.props;
     var authors = "";
 
-    if (this.state.authors != null) {
-      for (var i = 0; i < this.state.authors.length; i++) {
+    if (item.authors != null) {
+      for (var i = 0; i < item.authors.length; i++) {
         if (i > 1) {
-          authors = ", " + this.state.authors[i];
+          authors = ", " + item.authors[i];
         } else {
-          authors = this.state.authors[i];
+          authors = item.authors[i];
         }
       }
     }
 
     var descrip = "...";
 
-    if (this.state.description != null) {
-      descrip = this.state.description.substring(0, 230) + "...";
+    if (item.description != null) {
+      descrip = item.description.substring(0, 200) + "...";
     }
 
     var id = "";
 
     if (this.props.identifier != null) {
       id = "book-" + this.props.identifier;
-      var a = this.state.count;
+      var a = item.count;
     }
     var links = noBookCover;
-    if (
-      this.state.imageLinks != null &&
-      this.state.imageLinks.thumbnail != null
-    ) {
-      links = this.state.imageLinks.thumbnail;
+    if (item.imageLinks != null && item.imageLinks.thumbnail != null) {
+      links = item.imageLinks.thumbnail;
     }
 
     return (
@@ -59,8 +54,8 @@ class Books extends Component {
             <div className="cover">
               <img
                 src={links}
-                alt={this.state.title}
-                title={this.state.title}
+                alt={item.title}
+                title={item.title}
                 width="100%"
                 height="100%"
               />
@@ -71,13 +66,13 @@ class Books extends Component {
           <div className={this.state.displayDetails ? "details" : "hidden"}>
             <ul>
               <li>{descrip}</li>
-              <li>{this.state.publishedDate}</li>
-              <li>{this.state.publisher}</li>
-              <li>{this.state.pageCount} pages</li>
+              <li>{item.publishedDate}</li>
+              <li>{item.publisher}</li>
+              <li>{item.pageCount} pages</li>
             </ul>
           </div>
           <div className="buttons">
-            <a href={this.state.previewLink} target="_blank">
+            <a href={item.previewLink} target="_blank">
               Preview
             </a>
             <a href="#" className="clicker" onClick={this.handleClick}>
@@ -87,7 +82,7 @@ class Books extends Component {
         </div>
         <figcaption>
           <h2>
-            <span>{this.state.title}</span>
+            <span>{item.title}</span>
             <span> By: {authors}</span>
           </h2>
         </figcaption>

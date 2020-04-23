@@ -4,9 +4,7 @@ import Footer from "./components/footer";
 import Books from "./components/books";
 import $ from "jquery";
 import "./App.css";
-/* import "./css/bookblock.css";
-import "./css/normalize.css";
- */ import axios from "axios";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +12,7 @@ class App extends Component {
 
     this.state = {
       items: [],
-      message: null,
+      searchInput: "",
     };
   }
 
@@ -48,14 +46,15 @@ class App extends Component {
   componentDidMount() {
     this.reloadBookList();
   }
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
   localSubmit(search) {
-    console.log("search " + search);
-    var component = this;
     axios
       .get("http://localhost:8080/search/title/" + search)
       .then((response) => {
-        console.log(response.data.result);
-        component.setState({ items: response.data.result });
+        this.setState({ items: response.data.result, searchInput: "" });
       })
       .catch(function (error) {
         console.log(error);
@@ -83,7 +82,11 @@ class App extends Component {
     }
     return (
       <React.Fragment>
-        <Header localSubmit={this.localSubmit.bind(this)} />
+        <Header
+          localSubmit={this.localSubmit.bind(this)}
+          searchInput={this.state.searchInput}
+          handleChange={this.handleChange}
+        />
         <div className="main">
           <div id="bookshelf" className="bookshelf">
             {content}

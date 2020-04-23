@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import bookSearchImage from "./img/bookSearch.jpg";
 class Header extends Component {
-  state = {
-    searchInput: "",
-  };
-  handleChange = (event) => {
-    this.setState({ searchInput: event.target.value });
-  };
   handleSubmit = (event) => {
     event.preventDefault();
-
-    this.props.localSubmit(this.state.searchInput);
-    this.setState({ searchInput: "" });
+    this.props.localSubmit(this.props.searchInput);
   };
   render() {
     return (
@@ -34,8 +26,8 @@ class Header extends Component {
               placeholder="Search"
               ref="search"
               name="searchInput"
-              value={this.state.searchInput}
-              onChange={this.handleChange}
+              value={this.props.searchInput}
+              onChange={(event) => this.props.handleChange(event)}
             />
             <div className="input-group-append">
               <button type="Submit" className="btn btn-secondary">

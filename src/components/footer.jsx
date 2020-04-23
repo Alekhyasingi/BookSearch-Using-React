@@ -3,7 +3,6 @@ import React, { Component } from "react";
 //import googleBooksAPIImage from "./img/googlebooks.png";
 
 class Footer extends Component {
-  //state = {};
   render() {
     return (
       <div className="related">

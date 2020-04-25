@@ -1,45 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
 import bookSearchImage from "./img/bookSearch.jpg";
-class Header extends Component {
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.localSubmit(this.props.searchInput);
-  };
-  render() {
-    return (
-      <header className="main">
-        <p>Book Search</p>
 
-        <form
-          style={{ width: 550, marginLeft: "auto", marginRight: "auto" }}
-          onSubmit={this.handleSubmit}
-        >
-          <div className="input-group">
-            <img
-              style={{ height: 50, width: 150 }}
-              className="logo-img"
-              src={bookSearchImage}
-              alt="lib"
-            />
+const Header = (props) => {
+  return (
+    <header className="main">
+      <p>Book Search</p>
 
-            <input
-              className="form-control"
-              placeholder="Search"
-              ref="search"
-              name="searchInput"
-              value={this.props.searchInput}
-              onChange={(event) => this.props.handleChange(event)}
-            />
-            <div className="input-group-append">
-              <button type="Submit" className="btn btn-secondary">
-                <i className="fa fa-search"></i>
-              </button>
-            </div>
+      <form
+        style={{ width: 550, marginLeft: "auto", marginRight: "auto" }}
+        onSubmit={(event) => {
+          event.preventDefault();
+          props.localSubmit(props.searchInput);
+        }}
+      >
+        <div className="input-group">
+          <img
+            style={{ height: 50, width: 150 }}
+            className="logo-img"
+            src={bookSearchImage}
+            alt="lib"
+          />
+
+          <input
+            className="form-control"
+            placeholder="Search"
+            name="searchInput"
+            value={props.searchInput}
+            onChange={(event) => props.handleChange(event)}
+          />
+          <div className="input-group-append">
+            <button type="Submit" className="btn btn-secondary">
+              <i className="fa fa-search"></i>
+            </button>
           </div>
-        </form>
-      </header>
-    );
-  }
-}
+        </div>
+      </form>
+    </header>
+  );
+};
 
 export default Header;

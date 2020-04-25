@@ -7,8 +7,8 @@ import "./App.css";
 import axios from "axios";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       items: [],
@@ -51,7 +51,7 @@ class App extends Component {
 
     this.setState({ items });
   };
-  localSubmit(search) {
+  localSubmit = (search) => {
     axios
       .get("http://localhost:8080/search/title/" + search)
       .then((response) => {
@@ -66,7 +66,7 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   render() {
     var books = [];
@@ -94,7 +94,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header
-          localSubmit={this.localSubmit.bind(this)}
+          localSubmit={this.localSubmit}
           searchInput={this.state.searchInput}
           handleChange={this.handleChange}
         />

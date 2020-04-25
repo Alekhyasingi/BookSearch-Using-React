@@ -1,24 +1,27 @@
-import React, { Component } from "react";
-//import reactImage from "./img/react.png";
-//import googleBooksAPIImage from "./img/googlebooks.png";
+import React from "react";
+const Footer = () => {
+  return (
+    <div className="related">
+      <p>Created by : Alekhya Singisetty</p>
 
-class Footer extends Component {
-  render() {
-    return (
-      <div className="related">
-        <p>Created by : Alekhya Singisetty</p>
-
-        <a href="http://facebook.github.io/react/" target="_blank">
-          {/* <img className="logo-img" src={reactImage} /> */}
-          <h4>React JS</h4>
-        </a>
-        <a href="https://developers.google.com/books/?hl=en" target="_blank">
-          {/* <img className="logo-img" src={googleBooksAPIImage} /> */}
-          <h4>Google Books API</h4>
-        </a>
-      </div>
-    );
-  }
-}
+      <a
+        href="http://facebook.github.io/react/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {/* <img className="logo-img" src={reactImage} /> */}
+        <h4>React JS</h4>
+      </a>
+      <a
+        href="https://developers.google.com/books/?hl=en"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {/* <img className="logo-img" src={googleBooksAPIImage} /> */}
+        <h4>Google Books API</h4>
+      </a>
+    </div>
+  );
+};
 
 export default Footer;
